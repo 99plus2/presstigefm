@@ -59,7 +59,22 @@ class GraphTest(unittest.TestCase):
         self.assertEqual(1, len(vertex2.neighbors))
 
     def test_remove_edge(self):
-        pass
+        g = Graph()
+        vertex1 = g.add_vertex('v1')
+        vertex2 = g.add_vertex('v2')
+        vertex3 = g.add_vertex('v3')
+        edge1 = g.add_edge(vertex1, vertex2)
+        edge2 = g.add_edge(vertex2, vertex3)
+
+        g.remove_edge(edge1)
+        self.assertEqual(1, len(g.edges))
+        self.assertTrue(edge1 not in g.edges)
+        self.assertTrue(vertex2 not in vertex1.neighbors)
+
+        g.remove_edge_between('v2', vertex3)
+        self.assertEqual(0, len(g.edges))
+        self.assertTrue(edge2 not in g.edges)
+        self.assertTrue(vertex3 not in vertex2.neighbors)
 
 if __name__ == '__main__':
     unittest.main()

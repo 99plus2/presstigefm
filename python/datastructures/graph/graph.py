@@ -62,10 +62,22 @@ class Graph:
         return edge
 
     def remove_edge(self, edge):
-        pass
+        self.edges.remove(edge)
+        v1, v2 = edge.get_vertices()
+        v1.remove_neighbor(v2)
+        v2.remove_neighbor(v1)
 
-    def remove_edge(self, vertex1, vertex2):
-        pass
+    def remove_edge_between(self, vertex1, vertex2):
+        v1 = self.get_vertex(vertex1)
+        v2 = self.get_vertex(vertex2)
+        edge_to_remove = None
+        for edge in self.edges:
+            if v1 in edge.get_vertices() and v2 in edge.get_vertices():
+                edge_to_remove = edge
+                break
+        self.edges.remove(edge_to_remove)
+        v1.remove_neighbor(v2)
+        v2.remove_neighbor(v1)
 
 class Vertex:
 
