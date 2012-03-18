@@ -5,6 +5,14 @@ from graph.graph import Graph, Vertex
 
 class GraphTest(unittest.TestCase):
 
+    def test_get_vertex(self):
+        g = Graph()
+        vertex = g.add_vertex('v1')
+
+        self.assertEqual(vertex, g.get_vertex('v1'))
+        self.assertEqual(vertex, g.get_vertex(vertex))
+        self.assertRaises(ValueError, g.get_vertex, 'v2')
+
     def test_add_vertex(self):
         g = Graph()
         g.add_vertex('v1')
@@ -33,6 +41,25 @@ class GraphTest(unittest.TestCase):
         edge = g.add_edge('v3', 'v4', label='foo', value=10)
         self.assertEqual('foo', edge.label)
         self.assertEqual(10, edge.value)
+
+    def test_remove_vertex(self):
+        g = Graph()
+        vertex1 = g.add_vertex('v1')
+        vertex2 = g.add_vertex('v2')
+        g.add_vertex('v3')
+        edge1 = g.add_edge('v1', 'v2')
+        edge2 = g.add_edge('v1', 'v3')
+        edge3 = g.add_edge('v2', 'v3')
+
+        g.remove_vertex('v3')
+        self.assertEqual(2, len(g.vertices))
+        self.assertEqual(1, len(g.edges))
+        self.assertTrue('v3' not in g.vertices)
+        self.assertEqual(1, len(vertex1.neighbors))
+        self.assertEqual(1, len(vertex2.neighbors))
+
+    def test_remove_edge(self):
+        pass
 
 if __name__ == '__main__':
     unittest.main()

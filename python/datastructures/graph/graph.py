@@ -16,19 +16,35 @@ class Graph:
 
     def add_vertex(self, vertex_or_name):
         """ Adds a new Vertex into the graph. 
-            Throws exception if vertex or name already in graph. """
+            Throws exception if vertex or name already in graph.
+            Returns the added vertex. """
         if isinstance(vertex_or_name, Vertex):
             if vertex_or_name.name in self.vertices:
                 raise ValueError('name already exists in graph')
             self.vertices[vertex_or_name.name] = vertex_or_name
+            return vertex_or_name
         else:
             if vertex_or_name in self.vertices:
                 raise ValueError('can not insert same vertex twice')
             vertex = Vertex(name=vertex_or_name)
             self.vertices[vertex_or_name] = vertex
+            return vertex
 
     def remove_vertex(self, vertex_or_name):
-        pass
+        """ Removes a vertex from the graph and deletes it's incident edges. """
+        vertex = self.get_vertex(vertex_or_name)
+        vertex = self.vertices.pop(vertex.name)
+        edges_to_remove = []
+        for edge in self.edges:
+            v1, v2 = edge.get_vertices()
+            if vertex in (v1, v2):
+                edges_to_remove.append(edge)
+                if vertex == v1:
+                    v2.remove_neighbor(vertex)
+                else:
+                    v1.remove_neighbor(vertex)
+        for edge in edges_to_remove:
+            self.edges.remove(edge)
 
     def add_edge(self, start_vertex, end_vertex, label=None, value=None):
         """ Adds a edge between two vertices. Vertices can either be a
