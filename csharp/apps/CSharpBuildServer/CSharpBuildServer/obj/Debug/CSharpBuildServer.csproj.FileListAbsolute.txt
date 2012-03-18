@@ -1,0 +1,5 @@
+D:\repositories\presstigefm\csharp\apps\CSharpBuildServer\CSharpBuildServer\bin\CSharpBuildServer.dll
+D:\repositories\presstigefm\csharp\apps\CSharpBuildServer\CSharpBuildServer\bin\CSharpBuildServer.pdb
+D:\repositories\presstigefm\csharp\apps\CSharpBuildServer\CSharpBuildServer\obj\Debug\ResolveAssemblyReference.cache
+D:\repositories\presstigefm\csharp\apps\CSharpBuildServer\CSharpBuildServer\obj\Debug\CSharpBuildServer.dll
+D:\repositories\presstigefm\csharp\apps\CSharpBuildServer\CSharpBuildServer\obj\Debug\CSharpBuildServer.pdb
