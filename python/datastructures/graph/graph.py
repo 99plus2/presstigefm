@@ -3,7 +3,16 @@ class Graph:
 
     def __init__(self):
         self.vertices = {}
-        self.edges = {}
+        self.edges = []
+
+    def get_vertex(self, vertex_or_name):
+        """ Returns vertex or ValueError if vertex not in graph. """
+        if isinstance(vertex_or_name, Vertex) and vertex_or_name.name in self.vertices:
+            return vertex_or_name
+        elif vertex_or_name in self.vertices:
+            return self.vertices[vertex_or_name]
+        else:
+            raise ValueError('vertex not in graph')
 
     def add_vertex(self, vertex_or_name):
         """ Adds a new Vertex into the graph. 
@@ -18,7 +27,28 @@ class Graph:
             vertex = Vertex(name=vertex_or_name)
             self.vertices[vertex_or_name] = vertex
 
+    def remove_vertex(self, vertex_or_name):
+        pass
+
     def add_edge(self, start_vertex, end_vertex, label=None, value=None):
+        """ Adds a edge between two vertices. Vertices can either be a
+            Vertex-object or a id. Either way, they have to be already added.
+            Returns the created edge. """
+        _start_vertex = self.get_vertex(start_vertex)
+        _end_vertex = self.get_vertex(end_vertex)
+
+        edge = Edge(_start_vertex, _end_vertex, label, value)
+        self.edges.append(edge)
+
+        _start_vertex.add_neighbor(_end_vertex)
+        _end_vertex.add_neighbor(_start_vertex)
+
+        return edge
+
+    def remove_edge(self, edge):
+        pass
+
+    def remove_edge(self, vertex1, vertex2):
         pass
 
 class Vertex:
@@ -33,24 +63,21 @@ class Vertex:
         Vertex.ID += 1
         self.label = label or ''
         self.name = name or Vertex.ID
+        self.neighbors = []
 
-    def get_neighbors(self):
-        pass
+    def add_neighbor(self, vertex):
+        self.neighbors.append(vertex)
 
-    def get_edges(self):
-        pass
+    def remove_neighbor(self, vertex):
+        self.neighbors.remove(vertex)
 
 class Edge:
 
     def __init__(self, start_vertex, target_vertex, label=None, value=None):
         self.start_vertex = start_vertex
         self.target_vertex = target_vertex
-        self.label = ''
-        self.vallue = 0
-        if label:
-            self.label = label
-        if value:
-            self.value = value
+        self.label = label or ''
+        self.value = value or 0
 
     def get_vertices(self):
         return self.start_vertex, self.target_vertex
