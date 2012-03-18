@@ -10,22 +10,16 @@ class Graph:
             Throws exception if vertex or name already in graph. """
         if isinstance(vertex_or_name, Vertex):
             if vertex_or_name.name in self.vertices:
-                # TODO: Throw custom exception
-                pass
+                raise ValueError('name already exists in graph')
             self.vertices[vertex_or_name.name] = vertex_or_name
         else:
             if vertex_or_name in self.vertices:
-                # TODO: Throw custom exception
-                pass
+                raise ValueError('can not insert same vertex twice')
             vertex = Vertex(name=vertex_or_name)
             self.vertices[vertex_or_name] = vertex
 
     def add_edge(self, start_vertex, end_vertex, label=None, value=None):
         pass
-
-class DirectedGraph(Graph):
-
-    pass
 
 class Vertex:
 
@@ -37,11 +31,8 @@ class Vertex:
             internal ID as name. """
         self.name = Vertex.ID
         Vertex.ID += 1
-        self.label = ''
-        if name:
-            self.name = name
-        if label:
-            self.label = label
+        self.label = label or ''
+        self.name = name or Vertex.ID
 
     def get_neighbors(self):
         pass
@@ -65,5 +56,4 @@ class Edge:
         return self.start_vertex, self.target_vertex
 
 if __name__ == '__main__':
-    g = Graph()
-    g.add_vertex(Vertex())
+    pass
