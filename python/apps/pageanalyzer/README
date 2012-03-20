@@ -1,0 +1,2 @@
+The purpose of this application is to build a link-graph of a html-page. 
+It starts off with a start page and follows all links to the same domain of the start page.
