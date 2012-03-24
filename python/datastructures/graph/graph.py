@@ -12,7 +12,7 @@ class Graph:
         elif vertex_or_name in self.vertices:
             return self.vertices[vertex_or_name]
         else:
-            raise ValueError('vertex not in graph')
+            raise ValueError('vertex not in graph: ' + vertex_or_name)
 
     def add_vertex(self, vertex_or_name):
         """ Adds a new Vertex into the graph. 
