@@ -99,6 +99,12 @@ class Vertex:
     def remove_neighbor(self, vertex):
         self.neighbors.remove(vertex)
 
+    def __repr__(self):
+        s = '<Vertex> ' + repr(self.name)
+        if self.label:
+            s += ' [{0}]'.format(self.label)
+        return s
+
 class Edge:
 
     def __init__(self, start_vertex, target_vertex, label=None, value=None):
