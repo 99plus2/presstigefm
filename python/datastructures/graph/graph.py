@@ -56,8 +56,8 @@ class Graph:
         edge = Edge(_start_vertex, _end_vertex, label, value)
         self.edges.append(edge)
 
-        _start_vertex.add_neighbor(_end_vertex)
-        _end_vertex.add_neighbor(_start_vertex)
+        _start_vertex.add_neighbor(edge)
+        _end_vertex.add_neighbor(edge)
 
         return edge
 
@@ -92,12 +92,18 @@ class Vertex:
         self.label = label or ''
         self.name = name or Vertex.ID
         self.neighbors = []
+        self.edges = {}
 
-    def add_neighbor(self, vertex):
+    def add_neighbor(self, edge):
+        vertex = edge.start_vertex
+        if edge.start_vertex == self:
+            vertex = edge.target_vertex
         self.neighbors.append(vertex)
+        self.edges[vertex] = edge
 
     def remove_neighbor(self, vertex):
         self.neighbors.remove(vertex)
+        self.edges.pop(vertex)
 
     def __repr__(self):
         s = '<Vertex> ' + repr(self.name)
