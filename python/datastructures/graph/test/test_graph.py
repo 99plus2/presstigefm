@@ -76,5 +76,22 @@ class GraphTest(unittest.TestCase):
         self.assertTrue(edge2 not in g.edges)
         self.assertTrue(vertex3 not in vertex2.neighbors)
 
+    def test_get_successor_predecessor(self):
+        g = Graph()
+        v1 = g.add_vertex('v1')
+        v2 = g.add_vertex('v2')
+        v3 = g.add_vertex('v3')
+        e1 = g.add_edge(v1, v2)
+        e2 = g.add_edge(v1, v3)
+        e3 = g.add_edge(v2, v3)
+
+        self.assertEqual(2, len(v1.get_successors()))
+        self.assertEqual(1, len(v2.get_successors()))
+        self.assertEqual(0, len(v3.get_successors()))
+
+        self.assertEqual(0, len(v1.get_predecessors()))
+        self.assertEqual(1, len(v2.get_predecessors()))
+        self.assertEqual(2, len(v3.get_predecessors()))
+
 if __name__ == '__main__':
     unittest.main()

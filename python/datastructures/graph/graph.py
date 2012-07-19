@@ -105,6 +105,22 @@ class Vertex:
         self.neighbors.remove(vertex)
         self.edges.pop(vertex)
 
+    def get_successors(self):
+        """ Returns [list(Vertex)] all successors of this vertex """
+        successors = []
+        for neighbor in self.neighbors:
+            if self.edges[neighbor].target_vertex != self:
+                successors.append(neighbor)
+        return successors
+
+    def get_predecessors(self):
+        """ Returns [list[Vertex)] all predecessors of this vertex """
+        predecessors = []
+        for neighbor in self.neighbors:
+            if self.edges[neighbor].start_vertex != self:
+                predecessors.append(neighbor)
+        return predecessors
+
     def __repr__(self):
         s = '<Vertex> ' + repr(self.name)
         if self.label:
