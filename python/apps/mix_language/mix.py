@@ -25,7 +25,10 @@ class Byte:
 
     MAX_VALUE = 64
 
+    @staticmethod
     def num_of_bits():
+        """ returns int, the number of bits needed to store the specified
+            MAX_VALUE """
         counter = 0
         val = Byte.MAX_VALUE
         while val > 1:
@@ -64,4 +67,31 @@ class Register:
         repr_string += '|'
         return repr_string
 
+class Memory:
 
+    def __init__(self, size=4000):
+        self.registers = {}
+        for i in range(size):
+            self.registers[i] = Register(name=repr(i), num_of_bytes=5)
+
+class Environment:
+
+    def __init__(self):
+        self.reg_a = Register('A', 5)
+        self.reg_x = Register('X', 5)
+        self.reg_i1 = Register('I1', 2)
+        self.reg_i2 = Register('I2', 2)
+        self.reg_i3 = Register('I3', 2)
+        self.reg_i4 = Register('I4', 2)
+        self.reg_i5 = Register('I5', 2)
+        self.reg_i6 = Register('I6', 2)
+        self.reg_j = Register('J', 2)
+        self.overflow = False
+        self.equal = False
+        self.less = False
+        self.greater = False
+
+    def execute(mix_file):
+        """ Executes a given file written in mix-language.
+            mix_file = string, path to the file """
+        pass
