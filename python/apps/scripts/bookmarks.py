@@ -1,5 +1,13 @@
 #!/usr/bin/python3
-""" Little script to allow bookmarks paths in linux terminal. """
+""" Little script to allow bookmarks paths in linux terminal. 
+    Installation: 
+        add to ~/.bashrc:
+        function to()
+        {
+            python3 [path-of-script]/bookmarks.py -to $1 || echo;
+        }
+        alias bm="python3 [path-of-script]/bookmarks.py -bm $1"
+"""
 import sys
 import os
 import configparser
