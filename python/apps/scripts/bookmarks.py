@@ -4,7 +4,7 @@
         add to ~/.bashrc:
         function to()
         {
-            python3 [path-of-script]/bookmarks.py -to $1 || echo;
+            cd `python3 [path-of-script]/bookmarks.py -to $1`;
         }
         alias bm="python3 [path-of-script]/bookmarks.py -bm $1"
 """
